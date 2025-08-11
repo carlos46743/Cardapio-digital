@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Digital - Bolos Caseirinhos da Lu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Variáveis CSS para cores e fontes */
+        :root {
+            --primary-pink: #FF69B4; /* Rosa forte do coração */
+            --light-pink: #FFB6C1;  /* Rosa claro do fundo */
+            --dark-purple: #6c3483; /* Roxo do texto original - vamos ajustar */
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --gradient-start: #FFDDEE; /* Novo gradiente mais suave */
+            --gradient-end: #FFB6C1;
+
+            --font-cursive: 'Dancing Script', cursive; /* Fonte para títulos maiores */
+            --font-body: 'Montserrat', sans-serif; /* Fonte para o corpo do texto */
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--light-pink); /* Fundo rosa claro */
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden; /* Evita barra de rolagem horizontal */
+        }
+
+        /* Efeito de fundo ondulado/manchado - inspirado nas imagens */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/your-wavy-background-image.png') no-repeat center center fixed; /* Substitua por sua imagem de fundo ondulada/manchada */
+            background-size: cover;
+            opacity: 0.2; /* Opacidade suave */
+            z-index: -1;
+        }
+
+        header {
+            background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+            text-align: center;
+            padding: 30px 20px; /* Mais padding para maior destaque */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            position: relative; /* Para o ícone do Instagram */
+        }
+
+        header h1 {
+            font-family: var(--font-cursive); /* Fonte cursiva */
+            font-size: 5.5vw; /* Tamanho responsivo */
+            color: var(--dark-purple); /* Cor ajustada para combinar mais */
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para o título */
+        }
+
+        header .instagram-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            font-size: 1.1em;
+            color: var(--dark-purple);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        header .instagram-link img {
+            width: 35px; /* Ícone um pouco maior */
+            height: 35px;
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px; /* Limita a largura para melhor leitura */
+            margin: 20px auto; /* Centraliza o conteúdo */
+            background-color: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente */
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .cardapio-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border-bottom: 1px dashed var(--light-pink); /* Linha divisória suave */
+            text-align: center; /* Centraliza o conteúdo da seção */
+        }
+
+        .cardapio-section:last-of-type {
+            border-bottom: none; /* Remove a linha do último item */
+        }
+
+        .cardapio-section h2 {
+            font-family: var(--font-cursive); /* Títulos de seção também cursivos */
+            font-size: 3.5vw; /* Tamanho responsivo */
+            color: var(--primary-pink);
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block; /* Para centralizar e permitir o coração */
+        }
+        .cardapio-section h2::before { /* Coração antes do título */
+            content: '❤'; /* Caractere de coração */
+            color: var(--primary-pink);
+            margin-right: 10px;
+            font-size: 0.8em;
+            vertical-align: middle;
+        }
+
+        .cardapio-content {
+            display: flex;
+            flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+            justify-content: center; /* Centraliza os itens */
+            gap: 30px; /* Espaçamento entre itens */
+        }
+
+        .cardapio-item {
+            display: flex;
+            flex-direction: column; /* Texto acima ou abaixo da imagem */
+            align-items: center; /* Centraliza itens na coluna */
+            background-color: var(--text-light); /* Fundo branco para cada item */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            padding: 15px;
+            flex: 1 1 300px; /* Flexível, mas com base de 300px */
+            max-width: 450px; /* Limita largura máxima de cada item */
+        }
+        .cardapio-item.full-width { /* Para itens que ocupam a largura completa, como listas */
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            text-align: left;
+            padding: 20px;
+        }
+
+        .cardapio-item ul {
+            list-style: none; /* Remove os marcadores padrão */
+            padding: 0;
+            margin: 0;
+            font-size: 1.1em;
+            color: var(--text-dark);
+            flex: 1; /* Ocupa espaço flexível */
+            min-width: 180px; /* Garante que a lista não fique muito estreita */
+        }
+        .cardapio-item ul li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px; /* Espaço para o marcador personalizado */
+        }
+        .cardapio-item ul li::before {
+            content: '•'; /* Marcador de lista personalizado */
+            color: var(--primary-pink);
+            font-size: 1.2em;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .cardapio-item .item-image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px; /* Espaçamento entre múltiplas imagens */
+            margin-top: 15px; /* Espaço acima das imagens */
+        }
+
+        .cardapio-item img {
+            width: 180px; /* Imagens ligeiramente menores para mais elegância */
+            height: 180px;
+            border-radius: 50%; /* Imagens circulares para um toque suave */
+            object-fit: cover;
+            border: 3px solid var(--primary-pink); /* Borda em torno da imagem */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        /* Para o caso de várias imagens no mesmo item (ex: Bolos Recheados) */
+        .cardapio-item.multiple-images img {
+            width: 150px;
+            height: 150px;
+        }
+
+
+        footer {
+            background: linear-gradient(to left, var(--gradient-start), var(--gradient-end));
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+            color: var(--dark-purple);
+            font-weight: 600;
+        }
+
+        footer p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-family: var(--font-cursive); /* Fonte cursiva para "Fazemos Delivery" */
+        }
+
+        .whatsapp-button {
+            display: inline-flex; /* Para alinhar ícone e texto */
+            align-items: center;
+            background: #25D366; /* Cor verde do WhatsApp */
+            color: var(--text-light);
+            padding: 15px 30px; /* Mais padding para maior botão */
+            border-radius: 50px; /* Bordas bem arredondadas (pílula) */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3em;
+            transition: background 0.3s ease, transform 0.3s ease; /* Transição suave */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+            margin-top: 15px;
+        }
+        .whatsapp-button:hover {
+            background: #1DA851; /* Tom mais escuro ao passar o mouse */
+            transform: translateY(-3px); /* Efeito de "subir" */
+        }
+        .whatsapp-button img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        /* Ícone de moto para delivery */
+        .delivery-icon {
+            margin-top: 10px;
+        }
+        .delivery-icon img {
+            width: 50px; /* Ícone maior */
+            height: 50px;
+        }
+
+        /* Media Queries para Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 10vw; /* Adapta o tamanho do título em telas menores */
+            }
+            .cardapio-section h2 {
+                font-size: 7vw;
+            }
+            .cardapio-item.full-width {
+                flex-direction: column; /* Empilha em telas menores */
+                align-items: center;
+                text-align: center;
+            }
+            .cardapio-item ul {
+                width: 100%; /* Ocupa a largura total */
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            .cardapio-item ul li {
+                padding-left: 0; /* Remove padding extra */
+            }
+            .cardapio-item ul li::before {
+                position: static; /* Coloca o marcador antes do texto na mesma linha */
+                margin-right: 5px;
+            }
+            .whatsapp-button {
+                font-size: 1.1em;
+                padding: 12px 25px;
+            }
+            .cardapio-item img, .cardapio-item.multiple-images img {
+                width: 120px;
+                height: 120px;
+            }
+            main {
+                margin: 10px auto;
+                padding: 15px;
+            }
+            .cardapio-content {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 12vw;
+            }
+            .cardapio-section h2 {
+                font-size: 9vw;
+            }
+            .whatsapp-button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bolos Caseiros</h1>
+        <a href="https://www.instagram.com/caseirinhos.lu_/" target="_blank" class="instagram-link">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1200px-Instagram_logo_2016.svg.png" alt="Instagram Logo">
+            @CASEIRINHOS.LU_
+        </a>
+    </header>
+
+    <main>
+        <section class="cardapio-section">
+            <h2>Cardápio</h2>
+            <div class="cardapio-content">
+                <div class="cardapio-item full-width">
+                    <ul>
+                        <li>Bolo de Chocolate</li>
+                        <li>Bolo de Cenoura</li>
+                        <li>Bolo de Laranja</li>
+                        <li>Bolo de Milho</li>
+                        <li>Bolo de Fubá</li>
+                        <li>Bolo de Mandioca</li>
+                    </ul>
+                    <div class="item-image-container">
+                        <img src="https://github.com/carlos46743/Cardapio-digital/blob/5386205b04fe706fc1f32bdef448f8583a6e11ea/chocolate%20com%20chocolate.jpg" alt="Bolo de Chocolate">
+                        <img src="https://github.com/carlos46743/Cardapio-digital/blob/5386205b04fe706fc1f32bdef448f8583a6e11ea/cenoura.jpg" alt="Bolo de Cenoura">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cardapio-section">
+            <h2>Bolo De Pote</h2>
+            <div class="cardapio-content">
+                <div class="cardapio-item full-width">
+                    <ul>
+                        <li>Ninho com Morango</li>
+                        <li>Ninho</li>
+                        <li>Brigadeiro</li>
+                        <li>Bicho de pé</li>
+                        <li>Chocolate</li>
+                    </ul>
+                    <div class="item-image-container">
+                         <img src="https://github.com/carlos46743/Cardapio-digital/blob/5386205b04fe706fc1f32bdef448f8583a6e11ea/pote.jpg" alt="Bolo de Pote">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cardapio-section">
+            <h2>Pães caseiros</h2>
+            <div class="cardapio-content">
+                <div class="cardapio-item full-width">
+                    <ul>
+                        <li>Tradicional</li>
+                        <li>Recheados</li>
+                    </ul>
+                    <div class="item-image-container">
+                         <img src="https://github.com/carlos46743/Cardapio-digital/blob/5386205b04fe706fc1f32bdef448f8583a6e11ea/p%C3%A3o.jpg" alt="Pães Caseiros">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cardapio-section">
+            <h2>Bolos Recheados</h2>
+            <div class="cardapio-content">
+                <div class="cardapio-item full-width multiple-images">
+                    <ul>
+                        <li>Chocolate com chocolate</li>
+                        <li>Cenoura com chocolate</li>
+                        <li>Bolo vulcão</li>
+                    </ul>
+                    <div class="item-image-container">
+                        <img src="https://github.com/carlos46743/Cardapio-digital/blob/5386205b04fe706fc1f32bdef448f8583a6e11ea/chocolate%20com%20chocolate.jpg" alt="Chocolate com Chocolate">
+                        <img src="https://github.com/carlos46743/Cardapio-digital/blob/5386205b04fe706fc1f32bdef448f8583a6e11ea/IMG-20250810-WA0013.jpg" alt="Cenoura com Chocolate">
+                        <img src="https://github.com/carlos46743/Cardapio-digital/blob/5386205b04fe706fc1f32bdef448f8583a6e11ea/bolo1.jpg" alt="Bolo Vulcão">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="contact-info">
+        <p>Fazemos Delivery</p>
+        <div class="delivery-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Motor_Scooter_silhouette.svg" alt="Ícone de Delivery">
+        </div>
+        <a href="https://wa.me/5511946665734?text=Olá!%20Gostaria%20de%20fazer%20um%20pedido%20do%20cardápio." target="_blank" class="whatsapp-button">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
+            Faça o seu pedido (11) 94666-5734
+        </a>
+    </footer>
+</body>
+</html>
